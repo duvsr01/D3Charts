@@ -47,7 +47,7 @@ var svg = d3.select("body").append("svg")
   //  console.log(data[0]);
   //});
 
- d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(data){
+ var data = d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(data){
     console.log(data);
    return data;
   })
