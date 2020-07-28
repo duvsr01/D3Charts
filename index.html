@@ -64,10 +64,11 @@ var svg = d3.select("body").append("svg")
 
 
   // Scale the range of the data in the domains
-  x.domain(data.map(function(d) { return d.Month; }));
-  console.log("x is"+x);
+  x.domain(data.map(function(d) { 
+    console.log(d.Month);  
+    return d.Month; }));
+
   y.domain([0, d3.max(data, function(d) { return d.Cases; })]);
-  console.log("y is"+y);
 
   // append the rectangles for the bar chart
   svg.select("g").selectAll(".bar")
