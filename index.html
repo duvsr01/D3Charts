@@ -47,9 +47,9 @@ var svg = d3.select("body").append("svg")
   //  console.log(data[0]);
   //});
 
-  d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(data){
+ var data = d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(data){
     console.log(data);
-
+    return data;
   })
 
 /*var data = [
@@ -60,9 +60,6 @@ var svg = d3.select("body").append("svg")
   {letter: "4", frequency: 23},
   {letter: "5", frequency: 42}
 ];*/
-
-
-
   // Scale the range of the data in the domains
   x.domain(data.map(function(d) { 
     return d.Month; }));
