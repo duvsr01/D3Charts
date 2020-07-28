@@ -47,11 +47,9 @@ var svg = d3.select("body").append("svg")
   //  console.log(data[0]);
   //});
 
- d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(data){
-    console.log(data);
-   return data;
-  })
-
+ d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv").then(
+     console.log("data is"+data)).catch("error is "+error);
+ 
   console.log("data is"+JSON.stringify(data));
 
 /*var data = [
