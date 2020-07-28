@@ -47,7 +47,7 @@ var svg = d3.select("body").append("svg")
   //  console.log(data[0]);
   //});
 
-  d3.csv("sampledata.csv", function(data){
+  d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(data){
     console.log(data);
 
   })
@@ -59,13 +59,13 @@ var svg = d3.select("body").append("svg")
   {letter: "3", frequency: 16},
   {letter: "4", frequency: 23},
   {letter: "5", frequency: 42}
-];
+];*/
 
 
 
   // Scale the range of the data in the domains
-  x.domain(data.map(function(d) { return d.letter; }));
-  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+  x.domain(data.map(function(d) { return d.Month; }));
+  y.domain([0, d3.max(data, function(d) { return d.Cases; })]);
 
   // append the rectangles for the bar chart
   svg.select("g").selectAll(".bar")
@@ -73,10 +73,10 @@ var svg = d3.select("body").append("svg")
     .enter()
     .append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.letter); })
+      .attr("x", function(d) { return x(d.Month); })
       .attr("width", x.bandwidth())
-      .attr("y", function(d) { return y(d.frequency); })
-      .attr("height", function(d) { return height - y(d.frequency); }); 
+      .attr("y", function(d) { return y(d.Cases); })
+      .attr("height", function(d) { return height - y(d.Cases); }); 
 
   // add the y Axis
   svg.append("g")
@@ -86,7 +86,7 @@ var svg = d3.select("body").append("svg")
   // add the x Axis
   svg.append("g")
       .attr("transform", "translate(" + margin.left + "," + 250 +")")
-      .call(d3.axisBottom(x)); */
+      .call(d3.axisBottom(x)); 
 
 </script>
 </html>
