@@ -22,7 +22,9 @@
   Toggle sort
 
   <script>
-    d3.csv("sampledata.csv").then((d) => chart(d));
+    d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv").then((d) =>
+      chart(d)
+    );
 
     function chart(csv) {
       csv.forEach(function (d) {
@@ -73,7 +75,7 @@
 
       svg.append("g").attr("class", "y-axis");
 
-      update(d3.select("#month").property("cases"), 0);
+      update(d3.select("#month").property("value"), 0);
 
       function update(month, speed) {
         var data = csv.filter((f) => f.month == month);
@@ -117,14 +119,14 @@
       .select("#month")
       .style("border-radius", "5px")
       .on("change", function () {
-        chart.update(this.cases, 750);
+        chart.update(this.value, 750);
       });
 
     var checkbox = d3
       .select("#sort")
       .style("margin-left", "45%")
       .on("click", function () {
-        chart.update(select.property("cases"), 750);
+        chart.update(select.property("value"), 750);
       });
   </script>
 </body>
