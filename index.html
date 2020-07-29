@@ -49,13 +49,14 @@ var svg = d3.select("body").append("svg")
 
 function loaddata(){
  d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(data){
-    //console.log(data);
+    console.log(data);
    return data;
   })
 }
 
-let d1= loaddata();
-console.log("data is"+JSON.stringify(d1));
+
+let d1 = loaddata();
+console.log("data here is"+JSON.stringify(d1));
 
 /*var data = [
   {letter: "0", frequency: 4},
