@@ -47,7 +47,7 @@ var svg = d3.select("body").append("svg")
   //  console.log(data[0]);
   //});
 
-function loaddata(){
+async function loaddata(){
  d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(data){
     console.log(data);
    return data;
@@ -55,7 +55,7 @@ function loaddata(){
 }
 
 
-let d1 = loaddata();
+let d1 = await loaddata();
 console.log("data here is"+JSON.stringify(d1));
 
 /*var data = [
