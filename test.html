@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <b>Covid-19 Cases</b>
+  <b>Covid-19 Cases.</b>
   <svg id="chart" width="650" height="420"></svg>
 
   Choose Month:
@@ -27,14 +27,14 @@
     function chart(csv) {
       csv.forEach(function (d) {
         // var dates = d.date.split("-");
-        d.country = d.Country;
         d.month = d.Month;
-        d.cases = d.cases;
+        d.country = d.Country;
+        d.cases = d.Cases;
         return d;
       });
 
-      var countries = [...new Set(csv.map((d) => d.country))],
-        months = [...new Set(csv.map((d) => d.month))];
+      var months = [...new Set(csv.map((d) => d.month))],
+        countries = [...new Set(csv.map((d) => d.country))];
 
       var options = d3
         .select("#month")
@@ -71,10 +71,10 @@
 
       svg.append("g").attr("class", "y-axis");
 
-      update(d3.select("#month").property("value"), 0);
+      update(d3.select("#month").property("cases"), 0);
 
-      function update(months, speed) {
-        var data = csv.filter((f) => f.months == months);
+      function update(month, speed) {
+        var data = csv.filter((f) => f.month == month);
 
         y.domain([0, d3.max(data, (d) => d.cases)]).nice();
 
@@ -83,8 +83,7 @@
         data.sort(
           d3.select("#sort").property("checked")
             ? (a, b) => b.cases - a.cases
-            : (a, b) =>
-                countries.indexOf(a.countries) - countries.indexOf(b.countries)
+            : (a, b) => months.indexOf(a.months) - months.indexOf(b.months)
         );
 
         x.domain(data.map((d) => d.countries));
@@ -116,14 +115,14 @@
       .select("#month")
       .style("border-radius", "5px")
       .on("change", function () {
-        chart.update(this.value, 750);
+        chart.update(this.cases, 750);
       });
 
     var checkbox = d3
       .select("#sort")
       .style("margin-left", "45%")
       .on("click", function () {
-        chart.update(select.property("value"), 750);
+        chart.update(select.property("cases"), 750);
       });
   </script>
 </body>
