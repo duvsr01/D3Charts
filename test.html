@@ -18,9 +18,6 @@
   Choose Month:
   <select id="month"></select>
 
-  <input type="checkbox" id="sort" />
-  Toggle sort
-
   <script>
     d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv").then((d) =>
       chart(d)
@@ -126,13 +123,6 @@
       .style("border-radius", "5px")
       .on("change", function () {
         chart.update(this.value, 750);
-      });
-
-    var checkbox = d3
-      .select("#sort")
-      .style("margin-left", "45%")
-      .on("click", function () {
-        chart.update(select.property("value"), 750);
       });
   </script>
 </body>
