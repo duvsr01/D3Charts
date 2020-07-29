@@ -56,6 +56,9 @@ async function loaddata(){
 
 
 let d1 = await loaddata();
+
+if(d1 !=null)
+{
 console.log("data here is"+JSON.stringify(d1));
 
 /*var data = [
@@ -92,6 +95,8 @@ console.log("data here is"+JSON.stringify(d1));
   svg.append("g")
       .attr("transform", "translate(" + margin.left + "," + 250 +")")
       .call(d3.axisBottom(x)); 
+
+  }
 
 </script>
 </html>
