@@ -47,12 +47,13 @@ var svg = d3.select("body").append("svg")
   //  console.log(data[0]);
   //});
 
-
-d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(error,data){
+ d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(error,data){
      if(error)
       throw error;
   console.log(data);
-  console.log("data here is"+JSON.stringify(data));
+  console.log("data here is"+JSON.stringify(data)); 
+
+  d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv").then(d => chart(data));
 
 /*var data = [
   {letter: "0", frequency: 4},
@@ -62,9 +63,11 @@ d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(error,data)
   {letter: "4", frequency: 23},
   {letter: "5", frequency: 42}
 ];*/
+
+
   // Scale the range of the data in the domains
   x.domain(data.map(function(d) { 
-    return d.Month; }));
+    return d.Country; }));
 
   y.domain([0, d3.max(data, function(d) { return d.Cases; })]);
 
@@ -74,7 +77,7 @@ d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(error,data)
     .enter()
     .append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.Month); })
+      .attr("x", function(d) { return x(d.Country); })
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.Cases); })
       .attr("height", function(d) { return height - y(d.Cases); }); 
