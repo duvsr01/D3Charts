@@ -47,12 +47,15 @@ var svg = d3.select("body").append("svg")
   //  console.log(data[0]);
   //});
 
+function loaddata(){
  d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(data){
     //console.log(data);
-   return d1;
+   return data;
   })
+}
 
-  console.log("data is"+JSON.stringify(d1));
+let d1= loaddata();
+console.log("data is"+JSON.stringify(d1));
 
 /*var data = [
   {letter: "0", frequency: 4},
