@@ -82,6 +82,11 @@
 
         console.log("the data values here are" + JSON.stringify(data));
 
+        var maxVal = d3.max(data, function (d) {
+          return d.Cases;
+        });
+        console.log("maxval is" + maxVal);
+
         y.domain([0, d3.max(data, (d) => d.Cases)]).nice();
 
         svg.selectAll(".y-axis").transition().duration(speed).call(yAxis);
