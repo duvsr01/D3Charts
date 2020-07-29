@@ -83,7 +83,7 @@
         console.log("month is" + month);
         var data = csv.filter((f) => f.Month == month);
 
-        console.log("the data values here are" + data);
+        console.log("the data values here are" + JSON.stringify(data));
 
         y.domain([0, d3.max(data, (d) => d.cases)]).nice();
 
