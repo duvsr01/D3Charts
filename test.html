@@ -83,7 +83,13 @@
         });
         console.log("maxval is" + maxVal);
 
-        y.domain([0, maxVal]);
+        //y.domain([0, maxVal]);
+        y.domain([
+          0,
+          d3.max(data, function (d) {
+            return d.Cases;
+          }),
+        ]);
 
         svg.selectAll(".y-axis").transition().duration(speed).call(yAxis);
 
