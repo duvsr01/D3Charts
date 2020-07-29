@@ -78,7 +78,7 @@
       update(d3.select("#month").property("value"), 0);
 
       function update(month, speed) {
-        var data = csv.filter((f) => f.month == month);
+        var data = csv.filter((f) => f.months == month);
 
         y.domain([0, d3.max(data, (d) => d.cases)]).nice();
 
