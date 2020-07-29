@@ -29,14 +29,11 @@
     function chart(csv) {
       csv.forEach(function (d) {
         // var dates = d.date.split("-");
-        d.month = d.Month;
-        d.country = d.Country;
-        d.cases = d.Cases;
         return d;
       });
 
-      var months = [...new Set(csv.map((d) => d.month))],
-        countries = [...new Set(csv.map((d) => d.country))];
+      var months = [...new Set(csv.map((d) => d.Month))],
+        countries = [...new Set(csv.map((d) => d.Country))];
 
       console.log("months and countries" + months, countries);
 
