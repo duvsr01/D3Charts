@@ -1,29 +1,129 @@
 <head>
-    <meta charset="utf-8" />
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <style>
-      body {
-        padding-top: 25px;
-        margin: auto;
-        width: 650px;
-        font: 18px arial;
-      }
-    </style>
-  </head>
-  
-  <body>
-    <b>Dynamic bar-chart example.</b>
-    <svg id="chart" width="650" height="420"></svg>
-  
-    Choose year:
-    <select id="year"></select>
-  
-    <input type="checkbox" id="sort" />
-    Toggle sort
-  
-    <script>
-      d3.csv("data.csv").then((d) => chart(d));
+  <meta charset="utf-8" />
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <style>
+    body {
+      padding-top: 25px;
+      margin: auto;
+      width: 650px;
+      font: 18px arial;
+    }
+  </style>
+</head>
 
-    </script>
-  </body>
-</html>
+<body>
+  <b>Covid-19 Cases</b>
+  <svg id="chart" width="650" height="420"></svg>
+
+  Choose Month:
+  <select id="month"></select>
+
+  <input type="checkbox" id="sort" />
+  Toggle sort
+
+  <script>
+    d3.csv("sampledata.csv").then((d) => chart(d));
+
+    function chart(csv) {
+      csv.forEach(function (d) {
+        /* var dates = d.date.split("-");
+        d.year = dates[0];
+        d.month = dates[1];
+        d.value = +d.value; */
+        return d;
+      });
+
+      var countries = [...new Set(csv.map((d) => d.Country))],
+        months = [...new Set(csv.map((d) => d.Month))];
+
+      var options = d3
+        .select("#month")
+        .selectAll("option")
+        .data(months)
+        .enter()
+        .append("option")
+        .text((d) => d);
+
+      var svg = d3.select("#chart"),
+        margin = { top: 25, bottom: 10, left: 25, right: 25 },
+        width = +svg.attr("width") - margin.left - margin.right,
+        height = +svg.attr("height") - margin.top - margin.bottom;
+
+      var x = d3
+        .scaleBand()
+        .range([margin.left, width - margin.right])
+        .padding(0.1)
+        .paddingOuter(0.2);
+
+      var y = d3.scaleLinear().range([height - margin.bottom, margin.top]);
+
+      var xAxis = (g) =>
+        g
+          .attr("transform", "translate(0," + (height - margin.bottom) + ")")
+          .call(d3.axisBottom(x).tickSizeOuter(0));
+
+      var yAxis = (g) =>
+        g
+          .attr("transform", "translate(" + margin.left + ",0)")
+          .call(d3.axisLeft(y));
+
+      svg.append("g").attr("class", "x-axis");
+
+      svg.append("g").attr("class", "y-axis");
+
+      update(d3.select("#month").property("value"), 0);
+
+      function update(month, speed) {
+        var data = csv.filter((f) => f.month == month);
+
+        y.domain([0, d3.max(data, (d) => d.Cases)]).nice();
+
+        svg.selectAll(".y-axis").transition().duration(speed).call(yAxis);
+
+        data.sort(
+          d3.select("#sort").property("checked")
+            ? (a, b) => b.Cases - a.Cases
+            : (a, b) =>
+                countries.indexOf(a.countries) - countries.indexOf(b.countries)
+        );
+
+        x.domain(data.map((d) => d.countries));
+
+        svg.selectAll(".x-axis").transition().duration(speed).call(xAxis);
+
+        var bar = svg.selectAll(".bar").data(data, (d) => d.countries);
+
+        bar.exit().remove();
+
+        bar
+          .enter()
+          .append("rect")
+          .attr("class", "bar")
+          .attr("fill", "steelblue")
+          .attr("width", x.bandwidth())
+          .merge(bar)
+          .transition()
+          .duration(speed)
+          .attr("x", (d) => x(d.countries))
+          .attr("y", (d) => y(d.Cases))
+          .attr("height", (d) => y(0) - y(d.Cases));
+      }
+
+      chart.update = update;
+    }
+
+    var select = d3
+      .select("#month")
+      .style("border-radius", "5px")
+      .on("change", function () {
+        chart.update(this.value, 750);
+      });
+
+    var checkbox = d3
+      .select("#sort")
+      .style("margin-left", "45%")
+      .on("click", function () {
+        chart.update(select.property("value"), 750);
+      });
+  </script>
+</body>
