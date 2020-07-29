@@ -26,15 +26,15 @@
 
     function chart(csv) {
       csv.forEach(function (d) {
-        /* var dates = d.date.split("-");
-        d.year = dates[0];
-        d.month = dates[1];
-        d.value = +d.value; */
+        // var dates = d.date.split("-");
+        d.country = d.Country;
+        d.month = d.Month;
+        d.cases = d.cases;
         return d;
       });
 
-      var countries = [...new Set(csv.map((d) => d.Country))],
-        months = [...new Set(csv.map((d) => d.Month))];
+      var countries = [...new Set(csv.map((d) => d.country))],
+        months = [...new Set(csv.map((d) => d.month))];
 
       var options = d3
         .select("#month")
@@ -73,16 +73,16 @@
 
       update(d3.select("#month").property("value"), 0);
 
-      function update(month, speed) {
-        var data = csv.filter((f) => f.month == month);
+      function update(months, speed) {
+        var data = csv.filter((f) => f.months == months);
 
-        y.domain([0, d3.max(data, (d) => d.Cases)]).nice();
+        y.domain([0, d3.max(data, (d) => d.cases)]).nice();
 
         svg.selectAll(".y-axis").transition().duration(speed).call(yAxis);
 
         data.sort(
           d3.select("#sort").property("checked")
-            ? (a, b) => b.Cases - a.Cases
+            ? (a, b) => b.cases - a.cases
             : (a, b) =>
                 countries.indexOf(a.countries) - countries.indexOf(b.countries)
         );
@@ -105,8 +105,8 @@
           .transition()
           .duration(speed)
           .attr("x", (d) => x(d.countries))
-          .attr("y", (d) => y(d.Cases))
-          .attr("height", (d) => y(0) - y(d.Cases));
+          .attr("y", (d) => y(d.cases))
+          .attr("height", (d) => y(0) - y(d.cases));
       }
 
       chart.update = update;
