@@ -52,11 +52,6 @@ var svg = d3.select("body").append("svg")
      if(error)
       throw error;
     console.log(data);
-   return data;
-  })
-
-
-
 console.log("data here is"+JSON.stringify(data));
 
 /*var data = [
@@ -93,7 +88,8 @@ console.log("data here is"+JSON.stringify(data));
   svg.append("g")
       .attr("transform", "translate(" + margin.left + "," + 250 +")")
       .call(d3.axisBottom(x)); 
-
+ 
+})
 
 </script>
 </html>
