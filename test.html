@@ -86,11 +86,11 @@
 
         svg.selectAll(".y-axis").transition().duration(speed).call(yAxis);
 
-        data.sort(
+        /* data.sort(
           d3.select("#sort").property("checked")
             ? (a, b) => b.Cases - a.Cases
             : (a, b) => Month.indexOf(a.Month) - Month.indexOf(b.Month)
-        );
+        ); */
 
         x.domain(data.map((d) => d.Country));
 
