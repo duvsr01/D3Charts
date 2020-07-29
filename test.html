@@ -1,0 +1,29 @@
+<head>
+    <meta charset="utf-8" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+      body {
+        padding-top: 25px;
+        margin: auto;
+        width: 650px;
+        font: 18px arial;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <b>Dynamic bar-chart example.</b>
+    <svg id="chart" width="650" height="420"></svg>
+  
+    Choose year:
+    <select id="year"></select>
+  
+    <input type="checkbox" id="sort" />
+    Toggle sort
+  
+    <script>
+      d3.csv("data.csv").then((d) => chart(d));
+
+    </script>
+  </body>
+</html>
