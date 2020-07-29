@@ -48,6 +48,8 @@
         .append("option")
         .text((d) => d);
 
+      console.log("options is" + options);
+
       var svg = d3.select("#chart"),
         margin = { top: 25, bottom: 10, left: 25, right: 25 },
         width = +svg.attr("width") - margin.left - margin.right,
@@ -79,6 +81,8 @@
 
       function update(month, speed) {
         var data = csv.filter((f) => f.months == month);
+
+        console.log("the data values here are" + data);
 
         y.domain([0, d3.max(data, (d) => d.cases)]).nice();
 
