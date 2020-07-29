@@ -48,7 +48,7 @@
         .append("option")
         .text((d) => d);
 
-      console.log("options is" + options);
+      console.log("options is" + JSON.stringify(options));
 
       var svg = d3.select("#chart"),
         margin = { top: 25, bottom: 10, left: 25, right: 25 },
@@ -80,6 +80,7 @@
       update(d3.select("#month").property("value"), 0);
 
       function update(month, speed) {
+        console.log("month is" + month);
         var data = csv.filter((f) => f.months == month);
 
         console.log("the data values here are" + data);
