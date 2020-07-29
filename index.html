@@ -47,12 +47,12 @@ var svg = d3.select("body").append("svg")
   //  console.log(data[0]);
   //});
 
- var data = d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(data){
+ var d1 = d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(data){
     //console.log(data);
    return data;
   })
 
-  console.log("data is"+JSON.stringify(data));
+  console.log("data is"+JSON.stringify(d1));
 
 /*var data = [
   {letter: "0", frequency: 4},
@@ -63,10 +63,10 @@ var svg = d3.select("body").append("svg")
   {letter: "5", frequency: 42}
 ];*/
   // Scale the range of the data in the domains
-  x.domain(data.map(function(d) { 
+  x.domain(d1.map(function(d) { 
     return d.Month; }));
 
-  y.domain([0, d3.max(data, function(d) { return d.Cases; })]);
+  y.domain([0, d3.max(d1, function(d) { return d.Cases; })]);
 
   // append the rectangles for the bar chart
   svg.select("g").selectAll(".bar")
