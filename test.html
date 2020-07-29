@@ -82,21 +82,21 @@
 
         console.log("the data values here are" + JSON.stringify(data));
 
-        y.domain([0, d3.max(data, (d) => d.cases)]).nice();
+        y.domain([0, d3.max(data, (d) => d.Cases)]).nice();
 
         svg.selectAll(".y-axis").transition().duration(speed).call(yAxis);
 
         data.sort(
           d3.select("#sort").property("checked")
-            ? (a, b) => b.cases - a.cases
-            : (a, b) => months.indexOf(a.months) - months.indexOf(b.months)
+            ? (a, b) => b.Cases - a.Cases
+            : (a, b) => Month.indexOf(a.Month) - Month.indexOf(b.Month)
         );
 
-        x.domain(data.map((d) => d.countries));
+        x.domain(data.map((d) => d.Country));
 
         svg.selectAll(".x-axis").transition().duration(speed).call(xAxis);
 
-        var bar = svg.selectAll(".bar").data(data, (d) => d.countries);
+        var bar = svg.selectAll(".bar").data(data, (d) => d.Country);
 
         bar.exit().remove();
 
@@ -109,9 +109,9 @@
           .merge(bar)
           .transition()
           .duration(speed)
-          .attr("x", (d) => x(d.countries))
-          .attr("y", (d) => y(d.cases))
-          .attr("height", (d) => y(0) - y(d.cases));
+          .attr("x", (d) => x(d.Country))
+          .attr("y", (d) => y(d.Cases))
+          .attr("height", (d) => y(0) - y(d.Cases));
       }
 
       chart.update = update;
