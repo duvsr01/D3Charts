@@ -47,19 +47,17 @@ var svg = d3.select("body").append("svg")
   //  console.log(data[0]);
   //});
 
-async function loaddata(){
- d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(data){
+
+ d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv", function(error,data){
+     if(error)
+      throw error;
     console.log(data);
    return data;
   })
-}
 
 
-let d1 = await loaddata();
 
-if(d1 !=null)
-{
-console.log("data here is"+JSON.stringify(d1));
+console.log("data here is"+JSON.stringify(data));
 
 /*var data = [
   {letter: "0", frequency: 4},
@@ -70,10 +68,10 @@ console.log("data here is"+JSON.stringify(d1));
   {letter: "5", frequency: 42}
 ];*/
   // Scale the range of the data in the domains
-  x.domain(d1.map(function(d) { 
+  x.domain(data.map(function(d) { 
     return d.Month; }));
 
-  y.domain([0, d3.max(d1, function(d) { return d.Cases; })]);
+  y.domain([0, d3.max(data, function(d) { return d.Cases; })]);
 
   // append the rectangles for the bar chart
   svg.select("g").selectAll(".bar")
@@ -96,7 +94,6 @@ console.log("data here is"+JSON.stringify(d1));
       .attr("transform", "translate(" + margin.left + "," + 250 +")")
       .call(d3.axisBottom(x)); 
 
-  }
 
 </script>
 </html>
