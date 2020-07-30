@@ -33,6 +33,7 @@
 
       console.log("months and countries" + months, countries);
 
+      var tempColor;
       var options = d3
         .select("#month")
         .selectAll("option")
@@ -55,6 +56,14 @@
         .paddingOuter(0.2);
 
       var y = d3.scaleLinear().range([height - margin.bottom, margin.top]);
+
+      var tooltip = d3
+        .select("body")
+        .append("div")
+        .style("position", "absolute")
+        .style("padding", "0 10px")
+        .style("background", "white")
+        .style("opacity", 0);
 
       var xAxis = (g) =>
         g
@@ -118,7 +127,12 @@
           .duration(speed)
           .attr("x", (d) => x(d.Country))
           .attr("y", (d) => y(d.Cases))
-          .attr("height", (d) => y(0) - y(d.Cases));
+          .attr("height", (d) => y(0) - y(d.Cases))
+          .on("mouseover", function (d) {
+            tooltip.html(d).style("left", d3.event.pageX - 35 + "px");
+            tempColor = this.style.fill;
+            d3.select(this).style("fill", "yellow");
+          });
       }
 
       chart.update = update;
