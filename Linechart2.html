@@ -65,6 +65,14 @@
         return y(d.num);
       });
 
+    var tooltip = d3
+      .select("body")
+      .append("div")
+      .style("position", "absolute")
+      .style("padding", "0 10px")
+      .style("background", "white")
+      .style("opacity", 0);
+
     var svg = d3
       .select("body")
       .append("svg")
@@ -130,18 +138,25 @@
           .attr("transform", "translate(" + margin.left + ",0)")
           .call(yAxis);
 
-        svg.append("line").attr({
-          class: "horizontalGrid",
-          x1: 0,
-          x2: width,
-          y1: y(0),
-          y2: y(0),
-          fill: "none",
-          "shape-rendering": "crispEdges",
-          stroke: "black",
-          "stroke-width": "1px",
-          "stroke-dasharray": "3, 3",
-        });
+        svg
+          .append("line")
+          .attr({
+            class: "horizontalGrid",
+            x1: 0,
+            x2: width,
+            y1: y(0),
+            y2: y(0),
+            fill: "none",
+            "shape-rendering": "crispEdges",
+            stroke: "black",
+            "stroke-width": "1px",
+            "stroke-dasharray": "3, 3",
+          })
+          .on("mouseover", function (d) {
+            tooltip.html(d).style("left", d3.event.pageX - 35 + "px");
+            tempColor = this.style.fill;
+            d3.select(this).style("fill", "yellow");
+          });
 
         var lineItems = svg
           .selectAll(".lineItems")
@@ -194,17 +209,6 @@
           .duration(5000)
           .ease("linear")
           .attr("stroke-dashoffset", 0);
-
-        d3.selectAll("line")
-          .data(data)
-          .enter()
-          .append("line")
-          .on("mouseover", function (d, i) {
-            tooltip
-              .style("opacity", 1)
-              .style("left", d3.event.pageX + "px")
-              .style("top", d3.event.pageX + "px");
-          });
       }
     );
   </script>
