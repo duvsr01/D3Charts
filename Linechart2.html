@@ -89,7 +89,7 @@
         });
 
         var cases = color.domain().map(function (name) {
-          console.log("the name is " + name);
+          console.log("the label is " + name);
           return {
             label: name,
             values: data.map(function (d) {
@@ -98,7 +98,7 @@
           };
         });
 
-        console.log("the cases here is" + JSON.stringify(cases));
+        console.log("the cases data" + JSON.stringify(cases));
 
         x.domain(
           d3.extent(data, function (d) {
@@ -140,15 +140,15 @@
           "stroke-dasharray": "3, 3",
         });
 
-        var company = svg
-          .selectAll(".company")
+        var lineItems = svg
+          .selectAll(".lineItems")
           .data(cases)
           .enter()
           .append("g")
-          .attr("class", "company");
+          .attr("class", "lineItems");
 
         var path = svg
-          .selectAll(".company")
+          .selectAll(".lineItems")
           .append("path")
           .attr("class", "line")
           .attr("d", function (d) {
