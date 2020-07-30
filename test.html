@@ -58,7 +58,7 @@
       var y = d3.scaleLinear().range([height - margin.bottom, margin.top]);
 
       var tooltip = d3
-        .select("#chart")
+        .select("body")
         .append("div")
         .style("position", "absolute")
         .style("padding", "0 10px")
@@ -80,9 +80,11 @@
 
       svg.append("g").attr("class", "y-axis");
 
-      d3.selectAll("rect.bar").on("mouseover", function () {
-        return tooltip;
-      });
+      d3.select("body")
+        .selectAll("rect.bar")
+        .on("mouseover", function () {
+          return tooltip;
+        });
 
       update(d3.select("#month").property("value"), 0);
 
