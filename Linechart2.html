@@ -195,8 +195,8 @@
           .ease("linear")
           .attr("stroke-dashoffset", 0);
 
-        /*d3.selectAll("line")
-          .data(d)
+        d3.selectAll("line")
+          .data(data)
           .enter()
           .append("line")
           .on("mouseover", function (d, i) {
@@ -204,7 +204,7 @@
               .style("opacity", 1)
               .style("left", d3.event.pageX + "px")
               .style("top", d3.event.pageX + "px");
-          });*/
+          });
       }
     );
   </script>
