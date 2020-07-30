@@ -127,12 +127,7 @@
           .duration(speed)
           .attr("x", (d) => x(d.Country))
           .attr("y", (d) => y(d.Cases))
-          .attr("height", (d) => y(0) - y(d.Cases))
-          .on("mouseover", function (d) {
-            tooltip.html(d).style("left", d3.event.pageX - 35 + "px");
-            tempColor = this.style.fill;
-            d3.select(this).style("fill", "yellow");
-          });
+          .attr("height", (d) => y(0) - y(d.Cases));
       }
 
       chart.update = update;
