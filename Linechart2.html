@@ -195,8 +195,7 @@
           .ease("linear")
           .attr("stroke-dashoffset", 0);
 
-        <div name="tooltip" opacity="0"></div>;
-        selectAll("line")
+        d3.selectAll("line")
           .data(d)
           .enter()
           .append("line")
