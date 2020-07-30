@@ -48,7 +48,7 @@
       .axis()
       .scale(y)
       .tickFormat(function (d) {
-        return d + "%";
+        return d;
       })
       .ticks(5)
       .innerTickSize(15)
@@ -117,7 +117,7 @@
               return v.num;
             });
           }),
-        ]);
+        ]).Nice();
 
         svg
           .append("g")
@@ -167,11 +167,11 @@
 
         //var totalLength = path.node().getTotalLength();
         /*
-console.log(path);
-console.log(path.node());
-console.log(path[0][0]);
-console.log(path[0][1]);
-*/
+    console.log(path);
+    console.log(path.node());
+    console.log(path[0][0]);
+    console.log(path[0][1]);
+    */
         var totalLength = [
           path[0][0].getTotalLength(),
           path[0][1].getTotalLength(),
