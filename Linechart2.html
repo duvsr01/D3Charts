@@ -88,12 +88,12 @@
           d.date = parseDate(d.date);
         });
 
-        var companies = color.domain().map(function (name) {
+        var cases = color.domain().map(function (name) {
           console.log("the name is " + name);
           return {
             label: name,
             values: data.map(function (d) {
-              return { date: d.date, price: +d[name] };
+              return { date: d.date, num: +d[name] };
             }),
           };
         });
@@ -105,14 +105,14 @@
         );
 
         y.domain([
-          d3.min(companies, function (c) {
+          d3.min(cases, function (c) {
             return d3.min(c.values, function (v) {
-              return v.price;
+              return v.num;
             });
           }),
-          d3.max(companies, function (c) {
+          d3.max(cases, function (c) {
             return d3.max(c.values, function (v) {
-              return v.price;
+              return v.num;
             });
           }),
         ]);
