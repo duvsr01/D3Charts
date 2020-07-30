@@ -140,7 +140,7 @@
 
         var company = svg
           .selectAll(".company")
-          .data(companies)
+          .data(cases)
           .enter()
           .append("g")
           .attr("class", "company");
@@ -153,7 +153,7 @@
             return line(d.values);
           })
           .style("stroke", function (d) {
-            if (d.name == "cases") {
+            if (d.label == "cases") {
               return "rgb(000,255,000)";
             } else {
               return "#000";
