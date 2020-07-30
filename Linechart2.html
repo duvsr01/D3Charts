@@ -89,6 +89,7 @@
         });
 
         var companies = color.domain().map(function (name) {
+          console.log("the name is " + name);
           return {
             label: name,
             values: data.map(function (d) {
