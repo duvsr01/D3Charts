@@ -32,7 +32,7 @@
 
     var x = d3.time.scale().range([0, width]);
 
-    var y = d3.scale.linear().range([height, 0]);
+    var y = d3.scale.linear().range([height, 0]).Nice();
 
     var color = d3.scale.category10();
 
@@ -117,7 +117,7 @@
               return v.num;
             });
           }),
-        ]).Nice();
+        ]);
 
         svg
           .append("g")
