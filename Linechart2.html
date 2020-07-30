@@ -196,10 +196,10 @@
           .attr("stroke-dashoffset", 0);
 
         <div name="tooltip" opacity="0"></div>;
-        selectAll("rect")
+        selectAll("line")
           .data(d)
           .enter()
-          .append("rect")
+          .append("line")
           .on("mouseover", function (d, i) {
             tooltip
               .style("opacity", 1)
