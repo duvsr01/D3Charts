@@ -8,6 +8,12 @@
       width: 650px;
       font: 18px arial;
     }
+
+    .tooltip {
+      fill: #2b2929;
+      font-family: Georgia;
+      font-size: 150%;
+    }
   </style>
 </head>
 
@@ -82,8 +88,12 @@
 
       d3.select("body")
         .selectAll("rect.bar")
-        .on("mouseover", function () {
-          return tooltip;
+        .on("mouseover", function (d) {
+          tooltip.transition().delay(30).duration(200).style("opacity", 1);
+          tooltip
+            .html(d.measurement)
+            .style("left", d3.event.pageX + 25 + "px")
+            .style("top", d3.event.pageY + "px");
         });
 
       update(d3.select("#month").property("value"), 0);
