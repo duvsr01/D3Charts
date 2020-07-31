@@ -1,6 +1,7 @@
 <head>
   <meta charset="utf-8" />
   <script src="https://d3js.org/d3.v5.min.js"></script>
+
   <style>
     body {
       padding-top: 25px;
@@ -9,19 +10,64 @@
       font: 18px arial;
     }
 
-    .tooltip {
-      line-height: 1;
+    .bar:hover {
+      fill: rgb(218, 100, 45);
+    }
+
+    path.line {
+      fill: none;
+      stroke: black;
+      stroke-width: 1px;
+    }
+
+    .annotation path {
+      stroke: var(--accent-color);
+      fill: none;
+    }
+
+    .annotation path.connector-arrow {
+      fill: var(--accent-color);
+    }
+
+    .annotation text {
+      fill: var(--accent-color);
+    }
+
+    .annotation-note-title {
       font-weight: bold;
-      padding: 12px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      border-radius: 2px;
-      line-height: 1;
-      font-weight: bold;
-      padding: 12px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      border-radius: 2px;
+    }
+
+    .annotation.xythreshold {
+      cursor: move;
+    }
+
+    .annotation.xythreshold .annotation-subject {
+      stroke-width: 3px;
+    }
+
+    .annotation.badge path.subject-pointer,
+    .annotation.badge path.subject {
+      fill: var(--accent-color);
+      stroke-width: 3px;
+      stroke-linecap: round;
+    }
+
+    .annotation.badge path.subject-ring {
+      fill: white;
+      stroke-width: 3px;
+    }
+
+    .annotation.badge .badge-text {
+      fill: white;
+      font-size: 0.7em;
+    }
+
+    rect.annotation-note-bg {
+      fill: rgba(255, 255, 255, 0);
+    }
+
+    text.hover {
+      font-size: 0.7em;
     }
   </style>
 </head>
@@ -29,10 +75,9 @@
 <body>
   <b>Covid-19 Cases</b><br />
   <svg id="chart" width="650" height="420"></svg>
-
   Choose Month:
   <select id="month"></select>
-
+  <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
   <script>
     d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv").then((d) =>
       chart(d)
@@ -48,7 +93,6 @@
 
       console.log("months and countries" + months, countries);
 
-      var tempColor;
       var options = d3
         .select("#month")
         .selectAll("option")
@@ -72,15 +116,6 @@
 
       var y = d3.scaleLinear().range([height - margin.bottom, margin.top]);
 
-      var tooltip = d3
-        .select("body")
-        .append("div")
-        .style("position", "absolute")
-        .style("padding", "0 10px")
-        .style("background", "white")
-        .style("opacity", 0)
-        .text("here is tooltip");
-
       var xAxis = (g) =>
         g
           .attr("transform", "translate(0," + (height - margin.bottom) + ")")
@@ -90,6 +125,50 @@
         g
           .attr("transform", "translate(" + margin.left + ",0)")
           .call(d3.axisLeft(y));
+
+      const type = d3.annotationLabel;
+
+      const annotations = [
+        {
+          note: {
+            label: "Longer text to show text wrapping",
+            bgPadding: 20,
+            title: "Annotations :)",
+          },
+          //can use x, y directly instead of data
+          data: { date: 20, close: 30 },
+          className: "show-bg",
+          dy: 100,
+          dx: 300,
+        },
+      ];
+
+      const parseTime = d3.timeParse("%d-%b-%y");
+      const timeFormat = d3.timeFormat("%d-%b-%y");
+
+      const makeAnnotations = d3
+        .annotation()
+        .editMode(true)
+        //also can set and override in the note.padding property
+        //of the annotation object
+        .notePadding(15)
+        .type(type)
+        //accessors & accessorsInverse not needed
+        //if using x, y in annotations JSON
+        /*.accessors({
+          x: (d) => x(d.date),
+          y: (d) => y(d.close),
+        })
+        .accessorsInverse({
+          date: (d) => x.invert(d.x),
+          close: (d) => y.invert(d.y),
+        })*/
+        .annotations(annotations);
+
+      d3.select("svg")
+        .append("g")
+        .attr("class", "annotation-group")
+        .call(makeAnnotations);
 
       svg.append("g").attr("class", "x-axis");
 
