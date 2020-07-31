@@ -86,7 +86,7 @@
 
       svg.append("g").attr("class", "y-axis");
 
-      d3.select("body")
+      d3.select("chart")
         .selectAll("rect.bar")
         .on("mouseover", function (d) {
           tooltip.transition().delay(30).duration(200).style("opacity", 1);
