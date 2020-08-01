@@ -37,7 +37,8 @@
         var formatTime = d3.timeFormat("%m");
 
         csv.forEach(function (d) {
-          d.date = parseDate(d.date).formatTime(d.date);
+          d.date = parseDate(d.date);
+          formatTime(d.date);
           console.log("date is" + d.date);
         });
 
