@@ -1,161 +1,126 @@
-<head>
-  <meta charset="utf-8" />
-  <script src="https://d3js.org/d3.v5.min.js"></script>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
 
-  <style>
-    body {
-      padding-top: 25px;
-      margin: auto;
-      width: 650px;
-      font: 18px arial;
-    }
+    <style>
+      body {
+        padding-top: 25px;
+        margin: auto;
+        width: 650px;
+        font: 18px arial;
+      }
 
-    .bar:hover {
-      fill: rgb(218, 100, 45);
-    }
+      .bar:hover {
+        fill: rgb(218, 100, 45);
+      }
+    </style>
+  </head>
+  
 
-    path.line {
-      fill: none;
-      stroke: black;
-      stroke-width: 1px;
-    }
+  <body>
+    <div class="container-fluid">
 
-    .annotation path {
-      stroke: var(--accent-color);
-      fill: none;
-    }
+      <div class="container">
+        <h1>Title</h1>
+        <p>This is some text.This is some text.This is some text.This is some text.This is some text.This is some text.This is some text.</p>
+      </div>
 
-    .annotation path.connector-arrow {
-      fill: var(--accent-color);
-    }
 
-    .annotation text {
-      fill: var(--accent-color);
-    }
 
-    .annotation-note-title {
-      font-weight: bold;
-    }
+      <div>
+      <b>Covid-19 Cases</b><br />
+      <svg id="chart" width="650" height="420"></svg>
+      Choose Month:
+      <select id="month"></select>
+      <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+      <script>
+        d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv").then((d) =>
+          chart(d)
+        );
 
-    .annotation.xythreshold {
-      cursor: move;
-    }
+        function chart(csv) {
+          csv.forEach(function (d) {
+            return d;
+          });
 
-    .annotation.xythreshold .annotation-subject {
-      stroke-width: 3px;
-    }
+          var months = [...new Set(csv.map((d) => d.Month))],
+            countries = [...new Set(csv.map((d) => d.Country))];
 
-    .annotation.badge path.subject-pointer,
-    .annotation.badge path.subject {
-      fill: var(--accent-color);
-      stroke-width: 3px;
-      stroke-linecap: round;
-    }
+          console.log("months and countries" + months, countries);
 
-    .annotation.badge path.subject-ring {
-      fill: white;
-      stroke-width: 3px;
-    }
+          var options = d3
+            .select("#month")
+            .selectAll("option")
+            .data(months)
+            .enter()
+            .append("option")
+            .text((d) => d);
 
-    .annotation.badge .badge-text {
-      fill: white;
-      font-size: 0.7em;
-    }
+          console.log("options is" + JSON.stringify(options));
 
-    rect.annotation-note-bg {
-      fill: rgba(255, 255, 255, 0);
-    }
+          var svg = d3.select("#chart"),
+            margin = { top: 25, bottom: 10, left: 25, right: 25 },
+            width = +svg.attr("width") - margin.left - margin.right,
+            height = +svg.attr("height") - margin.top - margin.bottom;
 
-    text.hover {
-      font-size: 0.7em;
-    }
-  </style>
-</head>
+          var x = d3
+            .scaleBand()
+            .range([margin.left, width - margin.right])
+            .padding(0.1)
+            .paddingOuter(0.2);
 
-<body>
-  <b>Covid-19 Cases</b><br />
-  <svg id="chart" width="650" height="420"></svg>
-  Choose Month:
-  <select id="month"></select>
-  <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
-  <script>
-    d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv").then((d) =>
-      chart(d)
-    );
+          var y = d3.scaleLinear().range([height - margin.bottom, margin.top]);
 
-    function chart(csv) {
-      csv.forEach(function (d) {
-        return d;
-      });
+          var xAxis = (g) =>
+            g
+              .attr(
+                "transform",
+                "translate(0," + (height - margin.bottom) + ")"
+              )
+              .call(d3.axisBottom(x).tickSizeOuter(0));
 
-      var months = [...new Set(csv.map((d) => d.Month))],
-        countries = [...new Set(csv.map((d) => d.Country))];
+          var yAxis = (g) =>
+            g
+              .attr("transform", "translate(" + margin.left + ",0)")
+              .call(d3.axisLeft(y));
 
-      console.log("months and countries" + months, countries);
+          const type = d3.annotationLabel;
 
-      var options = d3
-        .select("#month")
-        .selectAll("option")
-        .data(months)
-        .enter()
-        .append("option")
-        .text((d) => d);
+          const annotations = [
+            {
+              note: {
+                //label: "Longer text to show text wrapping",
+                bgPadding: 20,
+                title: "Rise of cases",
+              },
+              //can use x, y directly instead of data
+              data: { date: 40, close: 60 },
+              className: "show-bg",
+              dy: 137,
+              dx: 162,
+            },
+          ];
 
-      console.log("options is" + JSON.stringify(options));
+          const parseTime = d3.timeParse("%d-%b-%y");
+          const timeFormat = d3.timeFormat("%d-%b-%y");
 
-      var svg = d3.select("#chart"),
-        margin = { top: 25, bottom: 10, left: 25, right: 25 },
-        width = +svg.attr("width") - margin.left - margin.right,
-        height = +svg.attr("height") - margin.top - margin.bottom;
-
-      var x = d3
-        .scaleBand()
-        .range([margin.left, width - margin.right])
-        .padding(0.1)
-        .paddingOuter(0.2);
-
-      var y = d3.scaleLinear().range([height - margin.bottom, margin.top]);
-
-      var xAxis = (g) =>
-        g
-          .attr("transform", "translate(0," + (height - margin.bottom) + ")")
-          .call(d3.axisBottom(x).tickSizeOuter(0));
-
-      var yAxis = (g) =>
-        g
-          .attr("transform", "translate(" + margin.left + ",0)")
-          .call(d3.axisLeft(y));
-
-      const type = d3.annotationLabel;
-
-      const annotations = [
-        {
-          note: {
-            label: "Longer text to show text wrapping",
-            bgPadding: 20,
-            title: "Annotations :)",
-          },
-          //can use x, y directly instead of data
-          data: { date: 20, close: 30 },
-          className: "show-bg",
-          dy: 100,
-          dx: 300,
-        },
-      ];
-
-      const parseTime = d3.timeParse("%d-%b-%y");
-      const timeFormat = d3.timeFormat("%d-%b-%y");
-
-      const makeAnnotations = d3
-        .annotation()
-        .editMode(true)
-        //also can set and override in the note.padding property
-        //of the annotation object
-        .notePadding(15)
-        .type(type)
-        //accessors & accessorsInverse not needed
-        //if using x, y in annotations JSON
-        /*.accessors({
+          const makeAnnotations = d3
+            .annotation()
+            .editMode(true)
+            //also can set and override in the note.padding property
+            //of the annotation object
+            .notePadding(15)
+            .type(type)
+            //accessors & accessorsInverse not needed
+            //if using x, y in annotations JSON
+            /*.accessors({
           x: (d) => x(d.date),
           y: (d) => y(d.close),
         })
@@ -163,86 +128,89 @@
           date: (d) => x.invert(d.x),
           close: (d) => y.invert(d.y),
         })*/
-        .annotations(annotations);
+            .annotations(annotations);
 
-      d3.select("svg")
-        .append("g")
-        .attr("class", "annotation-group")
-        .call(makeAnnotations);
+          d3.select("svg")
+            .append("g")
+            .attr("class", "annotation-group")
+            .call(makeAnnotations);
 
-      svg.append("g").attr("class", "x-axis");
+          svg.append("g").attr("class", "x-axis");
 
-      svg.append("g").attr("class", "y-axis");
+          svg.append("g").attr("class", "y-axis");
 
-      d3.select("chart")
-        .selectAll("rect.bar")
-        .on("mouseover", function (d) {
-          tooltip.transition().delay(30).duration(200).style("opacity", 1);
-          tooltip
-            .html(d.measurement)
-            .style("left", d3.event.pageX + 25 + "px")
-            .style("top", d3.event.pageY + "px");
-        });
+          d3.select("chart")
+            .selectAll("rect.bar")
+            .on("mouseover", function (d) {
+              tooltip.transition().delay(30).duration(200).style("opacity", 1);
+              tooltip
+                .html(d.measurement)
+                .style("left", d3.event.pageX + 25 + "px")
+                .style("top", d3.event.pageY + "px");
+            });
 
-      update(d3.select("#month").property("value"), 0);
+          update(d3.select("#month").property("value"), 0);
 
-      function update(month, speed) {
-        console.log("month is" + month);
-        var data = csv.filter((f) => f.Month == month);
+          function update(month, speed) {
+            console.log("month is" + month);
+            var data = csv.filter((f) => f.Month == month);
 
-        console.log("the data values here are" + JSON.stringify(data));
+            console.log("the data values here are" + JSON.stringify(data));
 
-        var maxVal = d3.max(data, function (d) {
-          return d.Cases;
-        });
-        console.log("maxval is" + maxVal);
+            var maxVal = d3.max(data, function (d) {
+              return d.Cases;
+            });
+            console.log("maxval is" + maxVal);
 
-        //y.domain([0, maxVal]);
-        y.domain([
-          0,
-          d3.max(data, function (d) {
-            return d.Cases;
-          }),
-        ]);
+            //y.domain([0, maxVal]);
+            y.domain([
+              0,
+              d3.max(data, function (d) {
+                return d.Cases;
+              }),
+            ]);
 
-        svg.selectAll(".y-axis").transition().duration(speed).call(yAxis);
+            svg.selectAll(".y-axis").transition().duration(speed).call(yAxis);
 
-        /* data.sort(
+            /* data.sort(
           d3.select("#sort").property("checked")
             ? (a, b) => b.Cases - a.Cases
             : (a, b) => Month.indexOf(a.Month) - Month.indexOf(b.Month)
         ); */
 
-        x.domain(data.map((d) => d.Country));
+            x.domain(data.map((d) => d.Country));
 
-        svg.selectAll(".x-axis").transition().duration(speed).call(xAxis);
+            svg.selectAll(".x-axis").transition().duration(speed).call(xAxis);
 
-        var bar = svg.selectAll(".bar").data(data, (d) => d.Country);
+            var bar = svg.selectAll(".bar").data(data, (d) => d.Country);
 
-        bar.exit().remove();
+            bar.exit().remove();
 
-        bar
-          .enter()
-          .append("rect")
-          .attr("class", "bar")
-          .attr("fill", "steelblue")
-          .attr("width", x.bandwidth())
-          .merge(bar)
-          .transition()
-          .duration(speed)
-          .attr("x", (d) => x(d.Country))
-          .attr("y", (d) => y(d.Cases))
-          .attr("height", (d) => y(0) - y(d.Cases));
-      }
+            bar
+              .enter()
+              .append("rect")
+              .attr("class", "bar")
+              .attr("fill", "steelblue")
+              .attr("width", x.bandwidth())
+              .merge(bar)
+              .transition()
+              .duration(speed)
+              .attr("x", (d) => x(d.Country))
+              .attr("y", (d) => y(d.Cases))
+              .attr("height", (d) => y(0) - y(d.Cases));
+          }
 
-      chart.update = update;
-    }
+          chart.update = update;
+        }
 
-    var select = d3
-      .select("#month")
-      .style("border-radius", "5px")
-      .on("change", function () {
-        chart.update(this.value, 750);
-      });
-  </script>
-</body>
+        var select = d3
+          .select("#month")
+          .style("border-radius", "5px")
+          .on("change", function () {
+            chart.update(this.value, 750);
+          });
+      </script>
+    </div>
+  </body>
+</div>
+</html>
