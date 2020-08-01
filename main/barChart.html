@@ -33,7 +33,7 @@
         });
 
         var parseDate = d3.timeParse("%Y-%m-%d");
-        // const parseTime = d3.timeParse("%d-%b-%y");
+        var formatTime = d3.timeFormat("%m");
 
         csv.forEach(function (d) {
           d.date = parseDate(d.date);
