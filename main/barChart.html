@@ -35,7 +35,7 @@
         var state = [...new Set(csv.map((d) => d.state))],
           date = [...new Set(csv.map((d) => d.date))];
 
-        console.log("state and date" + months, countries);
+        console.log("state and date" + state, date);
 
         var options = d3
           .select("#state")
