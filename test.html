@@ -8,6 +8,7 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <style>
       body {
@@ -20,6 +21,10 @@
       .bar:hover {
         fill: rgb(218, 100, 45);
       }
+      div otherchart {
+        background-color: yellow;
+      }
+
     </style>
   </head>
   
@@ -33,8 +38,25 @@
       </div>
 
 
+      <div class="btn-toolbar mb-2" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+          <button id="button1"type="button" class="btn btn-secondary" >1</button>
+          <button id="button2" type="button" class="btn btn-secondary" >2</button>
+        </div>
+        <br/><br/>
 
-      <div>
+       <script>
+        $( "#button1" ).click(function() {     
+              $('#chart2').hide();
+              $('#chart1').show();    
+      });
+      $( "#button2" ).click(function() {     
+        $('#chart1').hide();
+        $('#chart2').show();  
+    });
+    </script>
+
+      <div id="chart1">
       <b>Covid-19 Cases</b><br />
       <svg id="chart" width="650" height="420"></svg>
       Choose Month:
@@ -44,12 +66,10 @@
         d3.csv("https://duvsr01.github.io/D3Charts/sampledata.csv").then((d) =>
           chart(d)
         );
-
         function chart(csv) {
           csv.forEach(function (d) {
             return d;
           });
-
           var months = [...new Set(csv.map((d) => d.Month))],
             countries = [...new Set(csv.map((d) => d.Country))];
 
@@ -211,6 +231,10 @@
           });
       </script>
     </div>
+
+    <div id="chart2" style="display:none">
+      <b> other chart contents</b><br />
+      </div>
   </body>
 </div>
 </html>
