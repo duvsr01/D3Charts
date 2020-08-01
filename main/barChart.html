@@ -37,6 +37,7 @@
 
         csv.forEach(function (d) {
           d.date = parseDate(d.date);
+          console.log("date is" + date);
         });
 
         var state = [...new Set(csv.map((d) => d.state))],
