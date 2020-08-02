@@ -126,11 +126,14 @@
       </div>
 
       <script>
+        // A $( document ).ready() block.
         $(document).ready(function () {
+          console.log("ready!");
           $("#chart1").load(
             "https://duvsr01.github.io/D3Charts/charts/chart1.html"
           );
         });
+
         $("#button1").click(function () {
           $("#chart1").load(
             "https://duvsr01.github.io/D3Charts/charts/chart1.html"
@@ -149,8 +152,6 @@
       </script>
 
       <div id="chart1"></div>
-      <div id="chart2"></div>
-      <div id="chart3"></div>
     </div>
   </body>
 </html>
