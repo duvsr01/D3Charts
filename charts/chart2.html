@@ -1,0 +1,240 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+    <style>
+      body {
+        padding-top: 25px;
+        margin: auto;
+        width: 650px;
+        font: 18px arial;
+      }
+
+      /* LINE CHART */
+      path.line-0 {
+        fill: none;
+        stroke: #ed3700;
+      }
+
+      path.line-1 {
+        fill: none;
+        stroke: #2b2929;
+        stroke-dasharray: 2;
+      }
+
+      path.line-2 {
+        fill: none;
+        stroke: #9c9c9c;
+        stroke-dasharray: 6;
+      }
+
+      .serie_label {
+        fill: #2b2929;
+        font-family: Georgia;
+        font-size: 80%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chart2">
+      chart2
+      <svg id="linechart" width="650" height="420"></svg>
+      <script>
+        //------------------------1. PREPARATION------------------------//
+        //-----------------------------SVG------------------------------//
+        var width = 650;
+        var height = 420;
+        var margin = 15;
+        var padding = 15;
+        var adj = 50;
+        // we are appending SVG first
+
+        var svg1 = d3
+          .select("#linechart")
+          .append("svg")
+          .attr("preserveAspectRatio", "xMinYMin meet")
+          .attr(
+            "viewBox",
+            "-" +
+              adj +
+              " -" +
+              adj +
+              " " +
+              (width + adj * 2) +
+              " " +
+              (height + adj * 2)
+          )
+          .style("padding", padding)
+          .style("margin", margin)
+          .classed("svg-content", true);
+
+        //-----------------------------DATA-----------------------------//
+        var timeConv = d3.timeParse("%d-%b-%Y");
+        var dataset = d3.csv(
+          "https://raw.githubusercontent.com/kn13-kiran/NarrativeVisualization/master/US-7Day-DateFormat.csv"
+        );
+        dataset.then(function (data) {
+          var slices = data.columns.slice(1).map(function (id) {
+            return {
+              id: id,
+              values: data.map(function (d) {
+                return {
+                  date: timeConv(d.date),
+                  measurement: +d[id],
+                };
+              }),
+            };
+          });
+
+          //----------------------------SCALES----------------------------//
+          var xScale = d3.scaleTime().range([0, width]);
+          var yScale = d3.scaleLinear().rangeRound([height, 0]);
+          xScale.domain(
+            d3.extent(data, function (d) {
+              return timeConv(d.date);
+            })
+          );
+          yScale.domain([
+            0,
+            d3.max(slices, function (c) {
+              return d3.max(c.values, function (d) {
+                return d.measurement + 4;
+              });
+            }),
+          ]);
+
+          //-----------------------------AXES-----------------------------//
+          var yaxis = d3
+            .axisLeft()
+            .ticks(10)
+            //.ticks((slices[0].values).length)
+            .scale(yScale);
+
+          var xaxis = d3
+            .axisBottom()
+            //.ticks(d3.timeDay.every(30))
+            .ticks(11)
+            .tickFormat(d3.timeFormat("%b %d"))
+            .scale(xScale);
+
+          // text label for the x axis
+          svg1
+            .append("text")
+            .attr(
+              "transform",
+              "translate(" + (width - 10) + " ," + (height + 30) + ")"
+            )
+            .style("text-anchor", "end")
+            .text("Months");
+
+          //----------------------------Annotations-----------------------------//
+
+          var type1 = d3.annotationLabel;
+
+          var annotations1 = [
+            {
+              note: { label: "First peak in Cases" },
+              x: 255,
+              y: 230,
+              dy: -37,
+              dx: -62,
+              subject: { radius: 350, radiusPadding: 1 },
+            },
+            {
+              note: { label: "Highest peak observed" },
+              x: 610,
+              y: 10,
+              dy: 30,
+              dx: -90,
+              subject: { radius: 350, radiusPadding: 1 },
+            },
+          ];
+
+          var parseTime = d3.timeParse("%d-%b-%y");
+          var timeFormat = d3.timeFormat("%d-%b-%y");
+
+          var makeAnnotations = d3
+            .annotation()
+            .editMode(true)
+            //also can set and override in the note.padding property
+            //of the annotation object
+            .notePadding(15)
+            .type(type1)
+            .annotations(annotations1);
+
+          svg1
+            .append("g")
+            .attr("class", "annotation-group")
+            .call(makeAnnotations);
+
+          //----------------------------LINES-----------------------------//
+          var line = d3
+            .line()
+            .x(function (d) {
+              return xScale(d.date);
+            })
+            .y(function (d) {
+              return yScale(d.measurement);
+            });
+
+          let id = 0;
+          var ids = function () {
+            return "line-" + id++;
+          };
+          //-------------------------2. DRAWING---------------------------//
+          //-----------------------------AXES-----------------------------//
+          svg1
+            .append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xaxis);
+
+          svg1
+            .append("g")
+            .attr("class", "axis")
+            .call(yaxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("dy", ".75em")
+            .attr("y", 16)
+            .style("text-anchor", "end")
+            .text("Frequency");
+
+          //----------------------------LINES-----------------------------//
+          var lines = svg1.selectAll("lines").data(slices).enter().append("g");
+
+          lines
+            .append("path")
+            .attr("class", ids)
+            .attr("d", function (d) {
+              return line(d.values);
+            });
+
+          lines
+            .append("text")
+            .attr("class", "serie_label")
+            .datum(function (d) {
+              return {
+                id: d.id,
+                value: d.values[d.values.length - 1],
+              };
+            })
+            .attr("transform", function (d) {
+              return (
+                "translate(" +
+                (xScale(d.value.date) + 10) +
+                "," +
+                (yScale(d.value.measurement) + 5) +
+                ")"
+              );
+            })
+            .attr("x", 5)
+            .text(function (d) {
+              return d.id;
+            });
+        });
+      </script>
+    </div>
+  </body>
+</html>
