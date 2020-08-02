@@ -32,7 +32,7 @@
       .serie_label {
         fill: #2b2929;
         font-family: Georgia;
-        font-size: 80%;
+        font-size: 100%;
       }
     </style>
   <body>
@@ -96,7 +96,7 @@
             d3.extent(data, function (d) {
               return timeConv(d.date);
             })
-          );
+          ).nice();
           yScale.domain([
             0,
             d3.max(slices, function (c) {
@@ -104,7 +104,7 @@
                 return d.measurement + 4;
               });
             }),
-          ]);
+          ]).nice();
 
           //-----------------------------AXES-----------------------------//
           var yaxis = d3
@@ -121,7 +121,7 @@
             .attr("x", -140)
             .attr("dy", "0.7em")
             .style("text-anchor", "end")
-            .text("Scale");
+            .text("People");
 
           var xaxis = d3
             .axisBottom()
@@ -138,7 +138,7 @@
               "translate(" + (width - 10) + " ," + (height + 30) + ")"
             )
             .style("text-anchor", "end")
-            .text("Months");
+            .text("Time");
 
           //----------------------------Annotations-----------------------------//
 
@@ -146,19 +146,35 @@
 
           var annotations1 = [
             {
-              note: { label: "First peak in Cases" },
-              x: 255,
-              y: 230,
+              note: { label: "Initial peak in Cases" },
+              x: 279,
+              y: 235,
               dy: -37,
               dx: -62,
               subject: { radius: 350, radiusPadding: 1 },
             },
             {
               note: { label: "Highest peak observed" },
-              x: 610,
-              y: 10,
+              x: 600,
+              y: 19,
               dy: 30,
               dx: -90,
+              subject: { radius: 350, radiusPadding: 1 },
+            },
+            {
+              note: { label: "Initial peak in Deaths" },
+              x: 295,
+              y: 400,
+              dy: -50,
+              dx: -140,
+              subject: { radius: 350, radiusPadding: 1 },
+            },
+            {
+              note: { label: "Peak in Deaths" },
+              x: 540,
+              y: 400,
+              dy: -30,
+              dx: 90,
               subject: { radius: 350, radiusPadding: 1 },
             },
           ];

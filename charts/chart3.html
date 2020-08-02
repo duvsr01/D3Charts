@@ -10,7 +10,7 @@
         width: 650px;
         font: 18px arial;
       }
-      .circle:hover {
+      .dot:hover {
         fill: rgb(218, 100, 45);
       }
 
@@ -18,14 +18,20 @@
         color: white;
         position: absolute;
         text-align: center;
-        width: 80px;
-        height: 40px;
+        width: 100px;
+        height: 60px;
         padding: 2px;
         font: 12px sans-serif;
         background: rgba(0, 0, 0, 0.8);
         border: 2px solid black;
         pointer-events: none;
       }
+
+      .dot {
+        fill: steelblue;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+    }
     </style>
   </head>
   <body>
@@ -35,14 +41,14 @@
       </p>
       <br />
       <script></script>
-      <svg id="scatterplot" width="650" height="420"></svg>
+      <svg id="scatterplot" width="790" height="430"></svg>
       <script>
         // Set the dimensions of the canvas / graph
         var margin = {
           top: 30,
           right: 90,
           bottom: 90,
-          left: 50,
+          left: 70,
         };
         var width = 620 - margin.left - margin.right;
         var height = 400 - margin.top - margin.bottom;
@@ -57,6 +63,7 @@
 
         // Define the axes
         var xAxis1 = d3.axisBottom(x).ticks(10);
+
 
         var yAxis1 = d3.axisLeft(y).ticks(10);
 
@@ -99,7 +106,8 @@
           // Scale the range of the data
           // x.domain(d3.extent(data, d => d.deaths));
           x.domain([1, d3.max(data, (d) => d.deaths)]);
-          y.domain([1, d3.max(data, (d) => d.cases)]);
+
+          y.domain([1, d3.max(data, (d) => d.cases)]).nice();
 
           // Add the scatterplot
           svg
@@ -116,9 +124,10 @@
             .on("mouseover", (d) => {
               div.transition().duration(200).style("opacity", 0.9);
               div
-                .html(d.deaths + "<br/>" + d.cases + "<br/>" + d.state)
+                .html("Deaths: "+d.deaths + "<br/>" + "Cases: "+d.cases + "<br/>" +"State: "+d.state)
                 .style("left", d3.event.pageX + "px")
-                .style("top", d3.event.pageY - 28 + "px");
+                .style("top", d3.event.pageY - 28 + "px")
+                ;
             })
             .on("mouseout", () => {
               div.transition().duration(500).style("opacity", 0);
@@ -128,11 +137,31 @@
           svg
             .append("g")
             .attr("class", "xAxis")
-            .attr("transform", "translate(0," + height + ")")
+            .attr("transform", "translate(0," + (height+3) + ")")
             .call(xAxis1);
+
+            // text label for the x axis
+            svg
+            .append("text")
+            .attr(
+              "transform",
+              "translate(" + (width - 40) + " ," + (height + 40) + ")"
+            )
+            .style("text-anchor", "end")
+            .text("Deaths");
 
           // Add the Y Axis
           svg.append("g").attr("class", "yAxis").call(yAxis1);
+
+          // text label for the y axis
+          svg
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -65)
+            .attr("x", -140)
+            .attr("dy", "0.7em")
+            .style("text-anchor", "middle")
+            .text("Cases");
         });
       </script>
     </div>
