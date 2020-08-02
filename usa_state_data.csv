@@ -1,0 +1,387 @@
+﻿Month,State,Cases,Deaths
+Jan,Alabama,0,0
+Feb,Alabama,0,0
+Mar,Alabama,999,14
+Apr,Alabama,7068,272
+May,Alabama,17952,630
+June,Alabama,38045,950
+July,Alabama,81115,1491
+Jan,Alaska,0,0
+Feb,Alaska,0,0
+Mar,Alaska,133,2
+Apr,Alaska,353,7
+May,Alaska,469,8
+June,Alaska,1132,12
+July,Alaska,3204,19
+Jan,Arizona,0,0
+Feb,Arizona,0,0
+Mar,Arizona,0,0
+Apr,Arizona,0,0
+May,Arizona,0,0
+June,Arizona,0,0
+July,Arizona,0,0
+Jan,Arkansas,0,0
+Feb,Arkansas,0,0
+Mar,Arkansas,0,0
+Apr,Arkansas,0,0
+May,Arkansas,0,0
+June,Arkansas,0,0
+July,Arkansas,0,0
+Jan,California,0,0
+Feb,California,0,0
+Mar,California,0,0
+Apr,California,0,0
+May,California,0,0
+June,California,0,0
+July,California,0,0
+Jan,Colorado,0,0
+Feb,Colorado,0,0
+Mar,Colorado,0,0
+Apr,Colorado,0,0
+May,Colorado,0,0
+June,Colorado,0,0
+July,Colorado,0,0
+Jan,Connecticut,0,0
+Feb,Connecticut,0,0
+Mar,Connecticut,0,0
+Apr,Connecticut,0,0
+May,Connecticut,0,0
+June,Connecticut,0,0
+July,Connecticut,0,0
+Jan,Delaware,0,0
+Feb,Delaware,0,0
+Mar,Delaware,0,0
+Apr,Delaware,0,0
+May,Delaware,0,0
+June,Delaware,0,0
+July,Delaware,0,0
+Jan,District of Columbia,0,0
+Feb,District of Columbia,0,0
+Mar,District of Columbia,0,0
+Apr,District of Columbia,0,0
+May,District of Columbia,0,0
+June,District of Columbia,0,0
+July,District of Columbia,0,0
+Jan,Florida,0,0
+Feb,Florida,0,0
+Mar,Florida,0,0
+Apr,Florida,0,0
+May,Florida,0,0
+June,Florida,0,0
+July,Florida,0,0
+Jan,Georgia,0,0
+Feb,Georgia,0,0
+Mar,Georgia,0,0
+Apr,Georgia,0,0
+May,Georgia,0,0
+June,Georgia,0,0
+July,Georgia,0,0
+Jan,Guam,0,0
+Feb,Guam,0,0
+Mar,Guam,0,0
+Apr,Guam,0,0
+May,Guam,0,0
+June,Guam,0,0
+July,Guam,0,0
+Jan,Hawaii,0,0
+Feb,Hawaii,0,0
+Mar,Hawaii,0,0
+Apr,Hawaii,0,0
+May,Hawaii,0,0
+June,Hawaii,0,0
+July,Hawaii,0,0
+Jan,Idaho,0,0
+Feb,Idaho,0,0
+Mar,Idaho,0,0
+Apr,Idaho,0,0
+May,Idaho,0,0
+June,Idaho,0,0
+July,Idaho,0,0
+Jan,Illinois,0,0
+Feb,Illinois,0,0
+Mar,Illinois,0,0
+Apr,Illinois,0,0
+May,Illinois,0,0
+June,Illinois,0,0
+July,Illinois,0,0
+Jan,Indiana,0,0
+Feb,Indiana,0,0
+Mar,Indiana,0,0
+Apr,Indiana,0,0
+May,Indiana,0,0
+June,Indiana,0,0
+July,Indiana,0,0
+Jan,Iowa,0,0
+Feb,Iowa,0,0
+Mar,Iowa,0,0
+Apr,Iowa,0,0
+May,Iowa,0,0
+June,Iowa,0,0
+July,Iowa,0,0
+Jan,Kansas,0,0
+Feb,Kansas,0,0
+Mar,Kansas,0,0
+Apr,Kansas,0,0
+May,Kansas,0,0
+June,Kansas,0,0
+July,Kansas,0,0
+Jan,Kentucky,0,0
+Feb,Kentucky,0,0
+Mar,Kentucky,0,0
+Apr,Kentucky,0,0
+May,Kentucky,0,0
+June,Kentucky,0,0
+July,Kentucky,0,0
+Jan,Louisiana,0,0
+Feb,Louisiana,0,0
+Mar,Louisiana,0,0
+Apr,Louisiana,0,0
+May,Louisiana,0,0
+June,Louisiana,0,0
+July,Louisiana,0,0
+Jan,Maine,0,0
+Feb,Maine,0,0
+Mar,Maine,0,0
+Apr,Maine,0,0
+May,Maine,0,0
+June,Maine,0,0
+July,Maine,0,0
+Jan,Maryland,0,0
+Feb,Maryland,0,0
+Mar,Maryland,0,0
+Apr,Maryland,0,0
+May,Maryland,0,0
+June,Maryland,0,0
+July,Maryland,0,0
+Jan,Massachusetts,0,0
+Feb,Massachusetts,0,0
+Mar,Massachusetts,0,0
+Apr,Massachusetts,0,0
+May,Massachusetts,0,0
+June,Massachusetts,0,0
+July,Massachusetts,0,0
+Jan,Michigan,0,0
+Feb,Michigan,0,0
+Mar,Michigan,0,0
+Apr,Michigan,0,0
+May,Michigan,0,0
+June,Michigan,0,0
+July,Michigan,0,0
+Jan,Minnesota,0,0
+Feb,Minnesota,0,0
+Mar,Minnesota,0,0
+Apr,Minnesota,0,0
+May,Minnesota,0,0
+June,Minnesota,0,0
+July,Minnesota,0,0
+Jan,Mississippi,0,0
+Feb,Mississippi,0,0
+Mar,Mississippi,0,0
+Apr,Mississippi,0,0
+May,Mississippi,0,0
+June,Mississippi,0,0
+July,Mississippi,0,0
+Jan,Missouri,0,0
+Feb,Missouri,0,0
+Mar,Missouri,0,0
+Apr,Missouri,0,0
+May,Missouri,0,0
+June,Missouri,0,0
+July,Missouri,0,0
+Jan,Montana,0,0
+Feb,Montana,0,0
+Mar,Montana,0,0
+Apr,Montana,0,0
+May,Montana,0,0
+June,Montana,0,0
+July,Montana,0,0
+Jan,Nebraska,0,0
+Feb,Nebraska,0,0
+Mar,Nebraska,0,0
+Apr,Nebraska,0,0
+May,Nebraska,0,0
+June,Nebraska,0,0
+July,Nebraska,0,0
+Jan,Nevada,0,0
+Feb,Nevada,0,0
+Mar,Nevada,0,0
+Apr,Nevada,0,0
+May,Nevada,0,0
+June,Nevada,0,0
+July,Nevada,0,0
+Jan,New Hampshire,0,0
+Feb,New Hampshire,0,0
+Mar,New Hampshire,0,0
+Apr,New Hampshire,0,0
+May,New Hampshire,0,0
+June,New Hampshire,0,0
+July,New Hampshire,0,0
+Jan,New Jersey,0,0
+Feb,New Jersey,0,0
+Mar,New Jersey,0,0
+Apr,New Jersey,0,0
+May,New Jersey,0,0
+June,New Jersey,0,0
+July,New Jersey,0,0
+Jan,New Mexico,0,0
+Feb,New Mexico,0,0
+Mar,New Mexico,0,0
+Apr,New Mexico,0,0
+May,New Mexico,0,0
+June,New Mexico,0,0
+July,New Mexico,0,0
+Jan,New York,0,0
+Feb,New York,0,0
+Mar,New York,0,0
+Apr,New York,0,0
+May,New York,0,0
+June,New York,0,0
+July,New York,0,0
+Jan,North Carolina,0,0
+Feb,North Carolina,0,0
+Mar,North Carolina,0,0
+Apr,North Carolina,0,0
+May,North Carolina,0,0
+June,North Carolina,0,0
+July,North Carolina,0,0
+Jan,North Dakota,0,0
+Feb,North Dakota,0,0
+Mar,North Dakota,0,0
+Apr,North Dakota,0,0
+May,North Dakota,0,0
+June,North Dakota,0,0
+July,North Dakota,0,0
+Jan,Northern Mariana Islands,0,0
+Feb,Northern Mariana Islands,0,0
+Mar,Northern Mariana Islands,0,0
+Apr,Northern Mariana Islands,0,0
+May,Northern Mariana Islands,0,0
+June,Northern Mariana Islands,0,0
+July,Northern Mariana Islands,0,0
+Jan,Ohio,0,0
+Feb,Ohio,0,0
+Mar,Ohio,0,0
+Apr,Ohio,0,0
+May,Ohio,0,0
+June,Ohio,0,0
+July,Ohio,0,0
+Jan,Oklahoma,0,0
+Feb,Oklahoma,0,0
+Mar,Oklahoma,0,0
+Apr,Oklahoma,0,0
+May,Oklahoma,0,0
+June,Oklahoma,0,0
+July,Oklahoma,0,0
+Jan,Oregon,0,0
+Feb,Oregon,0,0
+Mar,Oregon,0,0
+Apr,Oregon,0,0
+May,Oregon,0,0
+June,Oregon,0,0
+July,Oregon,0,0
+Jan,Pennsylvania,0,0
+Feb,Pennsylvania,0,0
+Mar,Pennsylvania,0,0
+Apr,Pennsylvania,0,0
+May,Pennsylvania,0,0
+June,Pennsylvania,0,0
+July,Pennsylvania,0,0
+Jan,Puerto Rico,0,0
+Feb,Puerto Rico,0,0
+Mar,Puerto Rico,0,0
+Apr,Puerto Rico,0,0
+May,Puerto Rico,0,0
+June,Puerto Rico,0,0
+July,Puerto Rico,0,0
+Jan,Rhode Island,0,0
+Feb,Rhode Island,0,0
+Mar,Rhode Island,0,0
+Apr,Rhode Island,0,0
+May,Rhode Island,0,0
+June,Rhode Island,0,0
+July,Rhode Island,0,0
+Jan,South Carolina,0,0
+Feb,South Carolina,0,0
+Mar,South Carolina,0,0
+Apr,South Carolina,0,0
+May,South Carolina,0,0
+June,South Carolina,0,0
+July,South Carolina,0,0
+Jan,South Dakota,0,0
+Feb,South Dakota,0,0
+Mar,South Dakota,0,0
+Apr,South Dakota,0,0
+May,South Dakota,0,0
+June,South Dakota,0,0
+July,South Dakota,0,0
+Month,State,0,0
+Jan,Tennessee,0,0
+Feb,Tennessee,0,0
+Mar,Tennessee,0,0
+Apr,Tennessee,0,0
+May,Tennessee,0,0
+June,Tennessee,0,0
+July,Tennessee,0,0
+Jan,Texas,0,0
+Feb,Texas,0,0
+Mar,Texas,0,0
+Apr,Texas,0,0
+May,Texas,0,0
+June,Texas,0,0
+July,Texas,0,0
+Jan,Utah,0,0
+Feb,Utah,0,0
+Mar,Utah,0,0
+Apr,Utah,0,0
+May,Utah,0,0
+June,Utah,0,0
+July,Utah,0,0
+Jan,Vermont,0,0
+Feb,Vermont,0,0
+Mar,Vermont,0,0
+Apr,Vermont,0,0
+May,Vermont,0,0
+June,Vermont,0,0
+July,Vermont,0,0
+Jan,Virgin Islands,0,0
+Feb,Virgin Islands,0,0
+Mar,Virgin Islands,0,0
+Apr,Virgin Islands,0,0
+May,Virgin Islands,0,0
+June,Virgin Islands,0,0
+July,Virgin Islands,0,0
+Jan,Virginia,0,0
+Feb,Virginia,0,0
+Mar,Virginia,0,0
+Apr,Virginia,0,0
+May,Virginia,0,0
+June,Virginia,0,0
+July,Virginia,0,0
+Jan,Washington,0,0
+Feb,Washington,0,0
+Mar,Washington,0,0
+Apr,Washington,0,0
+May,Washington,0,0
+June,Washington,0,0
+July,Washington,0,0
+Jan,West Virginia,0,0
+Feb,West Virginia,0,0
+Mar,West Virginia,0,0
+Apr,West Virginia,0,0
+May,West Virginia,0,0
+June,West Virginia,0,0
+July,West Virginia,0,0
+Jan,Wisconsin,0,0
+Feb,Wisconsin,0,0
+Mar,Wisconsin,0,0
+Apr,Wisconsin,0,0
+May,Wisconsin,0,0
+June,Wisconsin,0,0
+July,Wisconsin,0,0
+Jan,Wyoming,0,0
+Feb,Wyoming,0,0
+Mar,Wyoming,0,0
+Apr,Wyoming,0,0
+May,Wyoming,0,0
+June,Wyoming,0,0
+July,Wyoming,0,0
