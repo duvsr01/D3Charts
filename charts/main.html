@@ -130,17 +130,25 @@
           //document.getElementById("chart2").innerHTML = "<b></b>";
         });
         $("#button1").click(function () {
-          $("#chart").show("chart1.html");
+          $("#chart1").load(
+            "https://duvsr01.github.io/D3Charts/charts/chart1.html"
+          );
         });
         $("#button2").click(function () {
-          $("#chart").show("chart2.html");
+          $("#chart1").load(
+            "https://duvsr01.github.io/D3Charts/charts/chart2.html"
+          );
         });
         $("#button3").click(function () {
-          $("#chart").show("chart3.html");
+          $("#chart1").load(
+            "https://duvsr01.github.io/D3Charts/charts/chart3.html"
+          );
         });
       </script>
 
-      <div id="chart"></div>
+      <div id="chart1"></div>
+      <div id="chart2"></div>
+      <div id="chart3"></div>
     </div>
   </body>
 </html>
