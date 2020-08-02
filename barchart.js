@@ -1,12 +1,12 @@
 !(function (d3) {
-  var p = document.createElement("div");
+  /*var p = document.createElement("div");
   p.appendChild(document.createTextNode("Covid-19 Cases "));
 
   var listEl = document.createElement("select");
   listEl.id = "state";
   p.appendChild(listEl);
 
-  document.body.appendChild(p);
+  document.body.appendChild(p);*/
 
   <svg id="chart" width="650" height="420"></svg>;
 
