@@ -1,0 +1,176 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+    <style>
+      body {
+        padding-top: 25px;
+        margin: auto;
+        width: 650px;
+        font: 18px arial;
+      }
+      .bar:hover {
+        fill: rgb(218, 100, 45);
+      }
+      div otherchart {
+        background-color: yellow;
+      }
+
+      rect {
+        stroke-width: 4px;
+        opacity: 0.7;
+        stroke: white;
+      }
+      rect:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+      .tooltip {
+        color: rgb(37, 194, 37);
+        font-family: Arial, Helvetica, sans-serif;
+        background: black;
+        padding: 10px;
+        border: 3px solid white;
+        box-shadow: 0 0px 10px black;
+      }
+
+      .axis path,
+  .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+  }
+
+  div.tooltip {
+    color: white;
+    position: absolute;
+    text-align: center;
+    width: 80px;
+    height: 40px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid black;
+    pointer-events: none;
+  }
+   /* LINE CHART */
+   path.line-0 {
+    fill: none;
+    stroke: #ed3700;
+  }
+
+  path.line-1 {
+    fill: none;
+    stroke: #2b2929;
+    stroke-dasharray: 2;
+  }
+
+  path.line-2 {
+    fill: none;
+    stroke: #9c9c9c;
+    stroke-dasharray: 6;
+  }
+
+  .serie_label {
+    fill: #2b2929;
+    font-family: Georgia;
+    font-size: 80%;
+  }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="container">
+        <span><h1 style="color: cornflowerblue;" style="text-align: center;">Covid Tracker</h1></span>
+       <span> <p style="color: dimgray;"> The following charts help us visualize the rise Covid-19 cases across USA.</p> </span>
+      </div>
+      <div class="btn-toolbar mb-2" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+          <button id="button1"type="button" class="btn btn-secondary" >1</button>
+          <button id="button2" type="button" class="btn btn-secondary" >2</button>
+          <button id="button3" type="button" class="btn btn-secondary" >3</button>
+        </div>
+        <br/><br/>
+        </div>
+
+        <div class="tabbable">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="barchart" data-toggle="tab" href="#barchart" role="tab" aria-controls="barchart" aria-selected="true">Bar Chart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="linechart" data-toggle="tab" href="#linechart" role="tab" aria-controls="linechart" aria-selected="false">Line Chart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="scatterplot" data-toggle="tab" href="#scatterplot" role="tab" aria-controls="scatterplot" aria-selected="false">Scatter Plot</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="barchart" role="tabpanel" aria-labelledby="barchart">barchart</div>
+            <div class="tab-pane fade" id="linechart" role="tabpanel" aria-labelledby="linechart">linechart</div>
+            <div class="tab-pane fade" id="scatterplot" role="tabpanel" aria-labelledby="scatterplot">scatterplot</div>
+          </div>
+          </div>
+
+
+          <script>
+            $.ajaxSetup ({
+                // Disable caching of AJAX responses
+                // Used when debugging
+                cache: false
+            });
+        
+            $.getScript("barchart.js");
+            $(".barchart").click(function() {
+                $.getScript("barchart.js");
+            })
+        </script>
+        <script>
+            $(".linechart").click(function() {
+                $.getScript("linechart_v1.js");
+            })
+        </script>
+        <script>
+            $(".scatterplot").click(function() {
+                $.getScript("scatterplot_v1.js");
+            })
+        </script>
+
+
+
+      <!--  <script>  
+         $("#button1" ).click(function() { 
+                  $('#chart3').hide();    
+                  $('#chart2').hide();               
+                  $('#chart1').show();    
+          });
+          $( "#button2" ).click(function() {     
+            $('#chart1').hide();
+            $('#chart3').hide();
+            $('#chart2').show();  
+        });
+        $( "#button3" ).click(function() {     
+            $('#chart1').hide();
+            $('#chart2').hide();
+            $('#chart3').show();  
+        });
+      </script> -->
+
+     
+
+
+ 
+      </div>
+  </body>
+</div>
+</html>
