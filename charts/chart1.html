@@ -17,13 +17,9 @@
   </head>
   <body>
     <div id="chart1">
-      <p
-        style="font-style: normal;"
-        style="font-size: medium;"
-        style="color: cornflowerblue;"
-      >
-        <b>Covid cases per State</b>
-      </p>
+      <h4 style="color: cornflowerblue;">
+        Covid cases per State
+      </h4>
       <br />
       <svg id="chart" width="650" height="420"></svg>
       Choose State:
@@ -91,8 +87,8 @@
           svg
             .append("text")
             .attr("transform", "rotate(-90)")
-            .attr("y", 0 - margin.left)
-            .attr("x", 0 - height / 4)
+            .attr("y", 0)
+            .attr("x", -170)
             .attr("dy", "0.7em")
             .style("text-anchor", "middle")
             .text("Total cases");

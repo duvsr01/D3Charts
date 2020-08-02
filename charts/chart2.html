@@ -38,14 +38,10 @@
   </head>
   <body>
     <div id="chart2">
-      <p
-        style="font-style: normal;"
-        style="font-size: medium;"
-        style="color: cornflowerblue;"
-      >
-      <b>
-        Covid cases and deaths across USA <b></p
-      ><br />
+      <h4 style="color: cornflowerblue;">
+        Covid cases and deaths across USA
+      </h4>
+      <br />
       <svg id="linechart" width="650" height="420"></svg>
       <script>
         //------------------------1. PREPARATION------------------------//
@@ -54,7 +50,7 @@
         var height = 420;
         var margin = 15;
         var padding = 15;
-        var adj = 50;
+        var adj = 65;
         // we are appending SVG first
 
         var svg1 = d3
@@ -117,6 +113,16 @@
             .ticks(10)
             //.ticks((slices[0].values).length)
             .scale(yScale);
+
+          // text label for the y axis
+          svg1
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -60)
+            .attr("x", -140)
+            .attr("dy", "0.7em")
+            .style("text-anchor", "end")
+            .text("Scale");
 
           var xaxis = d3
             .axisBottom()
